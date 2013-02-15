@@ -8,3 +8,5 @@ Everyone else skip the first part if you are looking for a quickstart
 guide (the first set is for getting the repo set up) and do some googling.
 
 Whee.
+Looks like it worked.
+
