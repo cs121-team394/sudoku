@@ -7,7 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GridGenerator.h"
+#import "GridModel.h"
+#import "GridView.h"
+#import "NumpadView.h"
 
 @interface ViewController : UIViewController
+{
+    GridGenerator* generator;
+    GridModel* theGridModel;
+    GridView* theGridView;
+    NumPadView* numPad;
+    
+    CGRect gridFrame;
+    CGRect numPadFrame;
+}
+
+-(void) loadNewGrid;
+
+-(void) checkForVictory;
+
+-(void) cellSelected;
 
 @end
