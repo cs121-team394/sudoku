@@ -20,8 +20,8 @@
         _row = r;
         _column = c;
         self.backgroundColor = bgColor;
-        target = nil;
-        message = nil;
+        cellSelectionTarget = nil;
+        cellSelectionAction = nil;
         
         CGRect subframe = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
         
@@ -37,7 +37,8 @@
         button.titleLabel.font = [UIFont fontWithName: @"Helvetica" size: fontSize];
         
         [self addSubview: button];
-        [button addTarget: self action: @selector(buttonPressed:) forControlEvents: UIControlEventTouchUpInside];
+        [button addTarget: self action: @selector(buttonPressed:) forControlEvents: UIControlEventTouchDown];
+        [button addTarget: self action: @selector(buttonUnpressed:) forControlEvents: (UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
     }
     return self;
 }
@@ -51,6 +52,19 @@
 {
     [[button layer] setBorderWidth: 6];
     [[button layer] setBorderColor: [UIColor cyanColor].CGColor];
+}
+
+-(void) unflashInvalid
+{
+    [[button layer] setBackgroundColor: [UIColor whiteColor].CGColor];
+    
+    currentlyFlashing = false;
+}
+-(void) flashInvalid
+{
+    [[button layer] setBackgroundColor: [UIColor redColor].CGColor];
+    
+    currentlyFlashing = true;
 }
 
 -(void) markAsMutable
@@ -68,16 +82,29 @@
     [button setTitle: [[NSString alloc] initWithFormat: @"%c", value] forState: UIControlStateNormal];
 }
 
--(void) setTarget: (id)sender action: (SEL)action
+-(void) setCellSelectionTarget: (id)sender action: (SEL)action
 {
-    target = sender;
-    message = action;
+    cellSelectionTarget = sender;
+    cellSelectionAction = action;
+}
+-(void) setFlashTimeoutTarget: (id)sender action: (SEL)action
+{
+    flashTimeoutTarget = sender;
+    flashTimeoutAction = action;
 }
 
 -(void) buttonPressed: (id)sender
 {
-    if (target != nil && message != nil) {
-        [target performSelector: message withObject: self];
+    if (cellSelectionTarget != nil && cellSelectionAction != nil) {
+        [cellSelectionTarget performSelector: cellSelectionAction withObject: self];
+    }
+}
+
+-(void) buttonUnpressed: (id)sender
+{
+    if (currentlyFlashing) {
+        [self unflashInvalid];
+        [flashTimeoutTarget performSelector: flashTimeoutAction withObject: self];
     }
 }
 

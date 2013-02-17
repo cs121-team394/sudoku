@@ -58,6 +58,11 @@
 
 -(bool) isConsistentFor: (char)value AtRow: (int)row AndColumn: (int)column
 {
+    _rowConflictIndex = -1;
+    _columnConflictIndex = -1;
+    _boxConflictRow = -1;
+    _boxConflictColumn = -1;
+    
     if (value == ' ') {
         return true;
     }
@@ -68,6 +73,7 @@
     for (int c = 0; c < 9; c++) {
         if (c != column) {
             if ([self getValueAtRow: row AndColumn: c] == value) {
+                _rowConflictIndex = c;
                 consistent = false;
             }
         }
@@ -77,6 +83,7 @@
     for (int r = 0; r < 9; r++) {
         if (r != row) {
             if ([self getValueAtRow: r AndColumn: column] == value) {
+                _columnConflictIndex = r;
                 consistent = false;
             }
         }
@@ -87,6 +94,8 @@
         for (int c = (column/3)*3; c < (column/3)*3 + 3; c++) {
             if ( !(r == row && c == column) ) {
                 if ([self getValueAtRow: r AndColumn: c] == value) {
+                    _boxConflictRow = r;
+                    _boxConflictColumn = c;
                     consistent = false;
                 }
             }

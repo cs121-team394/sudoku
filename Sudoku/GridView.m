@@ -43,7 +43,8 @@
                 currentCell = [[CellView alloc] initWithFrame: cellFrame Row: r Column: c BackgroundColor:self.backgroundColor];
                 
                 // make the button clickable, visible, and put it in our array of buttons.
-                [currentCell setTarget: self action: @selector(cellSelected:)];
+                [currentCell setCellSelectionTarget: self action: @selector(cellSelected:)];
+                [currentCell setFlashTimeoutTarget: self action: @selector(flashTimedOut:)];
                 [self addSubview: currentCell];
                 [row addObject: currentCell];
             }
@@ -69,6 +70,19 @@
     
     if (target != nil && message != nil) {
         [target performSelector: message];
+    }
+}
+
+-(void) flashTimedOut: (id)sender
+{
+    for (int r=0; r<9; r++) {
+        NSMutableArray* row = [grid objectAtIndex: r];
+        
+        for (int c=0; c<9; c++) {
+            CellView* cell = [row objectAtIndex: c];
+            
+            [cell unflashInvalid];
+        }
     }
 }
 
@@ -105,6 +119,13 @@
     else {
         [cell markAsImmutable];
     }
+}
+
+-(void) flashCellInconsistentAtRow: (int)row AndColumn: (int)column
+{
+    CellView* cell = [[grid objectAtIndex: row] objectAtIndex: column];
+    
+    [cell flashInvalid];
 }
 
 /*

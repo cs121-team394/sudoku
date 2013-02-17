@@ -13,8 +13,12 @@
     //    UIColor* background;
     UIButton* button;
     
-    id target;
-    SEL message;
+    bool currentlyFlashing;
+    
+    id cellSelectionTarget;
+    SEL cellSelectionAction;
+    id flashTimeoutTarget;
+    SEL flashTimeoutAction;
 }
 
 @property (readonly) int row;
@@ -25,11 +29,15 @@
 -(void) unhighlight;
 -(void) highlight;
 
+-(void) unflashInvalid;
+-(void) flashInvalid;
+
 -(void) markAsMutable;
 -(void) markAsImmutable;
 
 -(void) setValue: (char)value;
 
--(void) setTarget: (id)sender action: (SEL)action;
+-(void) setCellSelectionTarget: (id)sender action: (SEL)action;
+-(void) setFlashTimeoutTarget: (id)sender action: (SEL)action;
 
 @end

@@ -42,7 +42,7 @@ const double horizontalButtonFraction = 0.95 / numberOfButtons;
             
             [currentButton setValue: [self getDigitFromIndex: c]];
             
-            [currentButton setTarget: self action: @selector(buttonPressed:)];
+            [currentButton setCellSelectionTarget: self action: @selector(buttonPressed:)];
             [self addSubview: currentButton];
             [buttons addObject: currentButton];
         }

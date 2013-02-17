@@ -96,13 +96,26 @@
         int row = theGridView.selectedRow;
         int column = theGridView.selectedColumn;
         
-        if ([theGridModel getMutabilityAtRow: row AndColumn: column] &&
-            [theGridModel isConsistentFor: digit AtRow: row AndColumn: column]) {
-            
-            [theGridModel setValueTo: digit AtRow: row AndColumn: column];
-            [theGridView setCellValueTo: digit AtRow: row AndColumn: column];
-            
-            [self checkForVictory];
+        if ([theGridModel getMutabilityAtRow: row AndColumn: column]) {
+            if ([theGridModel isConsistentFor: digit AtRow: row AndColumn: column]) {
+                [theGridModel setValueTo: digit AtRow: row AndColumn: column];
+                [theGridView setCellValueTo: digit AtRow: row AndColumn: column];
+                
+                [self checkForVictory];
+            }
+            else {
+                [theGridView flashCellInconsistentAtRow: row AndColumn: column];
+                
+                if (theGridModel.rowConflictIndex >= 0) {
+                    [theGridView flashCellInconsistentAtRow: row AndColumn: theGridModel.rowConflictIndex];
+                }
+                if (theGridModel.columnConflictIndex >= 0) {
+                    [theGridView flashCellInconsistentAtRow: theGridModel.columnConflictIndex AndColumn: column];
+                }
+                if (theGridModel.boxConflictRow >= 0 && theGridModel.boxConflictColumn >= 0) {
+                    [theGridView flashCellInconsistentAtRow: theGridModel.boxConflictRow AndColumn: theGridModel.boxConflictColumn];
+                }
+            }
         }
     }
 }

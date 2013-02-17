@@ -23,5 +23,6 @@
 
 -(void) setCellValueTo: (char)value AtRow: (int)row AndColumn: (int)column;
 -(void) setCellMutabilityTo: (bool)isMutable AtRow: (int)row AndColumn: (int)column;
+-(void) flashCellInconsistentAtRow: (int)row AndColumn: (int)column;
 
 @end
