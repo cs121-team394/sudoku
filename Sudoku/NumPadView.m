@@ -9,9 +9,9 @@
 #import "NumPadView.h"
 #import "CellView.h"
 
-const double verticalButtonFraction = 0.5;
-const double horizontalButtonFraction = 0.1;
 const int numberOfButtons = 9;
+const double verticalButtonFraction = 2.0 / 3.0;
+const double horizontalButtonFraction = 0.95 / numberOfButtons;
 
 @implementation NumPadView
 

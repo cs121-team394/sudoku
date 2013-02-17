@@ -28,15 +28,17 @@
     // calculate size parameters
     int width = self.view.bounds.size.width;
     int height = self.view.bounds.size.height;
-    int size = MIN(width, height);
+    int smallerSize = MIN(width, height);
+    int gridWidth = smallerSize * 0.8;
     
-    int gridX = size * 0.25;
-    int gridY = size * 0.1;
-    gridFrame = CGRectMake(gridX, gridY, size/2, size/2);
+    int gridX = smallerSize * 0.1;
+    int gridY = smallerSize * 0.1;
+    gridFrame = CGRectMake(gridX, gridY, gridWidth, gridWidth);
     
     int numPadX = gridX;
-    int numPadY = size * 0.7;
-    numPadFrame = CGRectMake(numPadX, numPadY, size/2, size/10);
+    int numPadY = smallerSize;
+    // TODO: Change the final argument here so that the NumPad buttons are the dimensions we want.
+    numPadFrame = CGRectMake(numPadX, numPadY, gridWidth, smallerSize*0.15);
     
     // create the numPad
     numPad = [[NumPadView alloc] initWithFrame: numPadFrame];

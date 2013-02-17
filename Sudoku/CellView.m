@@ -49,7 +49,7 @@
 }
 -(void) highlight
 {
-    [[button layer] setBorderWidth: 4];
+    [[button layer] setBorderWidth: 6];
     [[button layer] setBorderColor: [UIColor cyanColor].CGColor];
 }
 
