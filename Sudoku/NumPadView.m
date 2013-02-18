@@ -2,16 +2,16 @@
 //  NumPadView.m
 //  Sudoku
 //
-//  Created by Greg Kronmiller on 2/13/13.
+//  Created by Greg Kronmiller on 2/10/13.
 //  Copyright (c) 2013 Evan Gaebler, Greg Kronmiller, Linnea Shin, and Michelle Chesley. All rights reserved.
 //
 
 #import "NumPadView.h"
 #import "CellView.h"
 
-const int numberOfButtons = 9;
-const double verticalButtonFraction = 2.0 / 3.0;
-const double horizontalButtonFraction = 0.95 / numberOfButtons;
+const double verticalButtonFraction = 0.667;
+const double horizontalButtonFraction = 0.095;
+const int numberOfButtons = 10;
 
 @implementation NumPadView
 
@@ -20,7 +20,6 @@ const double horizontalButtonFraction = 0.95 / numberOfButtons;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        _selectedDigit = ' ';
         buttons = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor blackColor];
         
@@ -33,7 +32,7 @@ const double horizontalButtonFraction = 0.95 / numberOfButtons;
         
         CellView* currentButton;
         
-        for (int c = 0; c < 9; c++) {
+        for (int c = 0; c < numberOfButtons; c++) {
             // Create a button at (horizontalPadding + x*buttonWidth, verticalPadding)
             int leftX = horizontalPadding + c*buttonWidth;
             int topY = verticalPadding;
@@ -47,18 +46,29 @@ const double horizontalButtonFraction = 0.95 / numberOfButtons;
             [buttons addObject: currentButton];
         }
         
+        _selectedDigit = ' ';
+        [self highlightButtonForDigit:_selectedDigit];
+
     }
     return self;
 }
 
 -(char) getDigitFromIndex: (int)index
 {
-    return (char) (index + '1');
+    if (index == 0) {
+        return ' ';
+    } else {
+        return (char) (index + '0');
+    }
 }
 
 -(int) getIndexFromDigit: (char)digit
 {
-    return (int) (digit - '1');
+    if (digit == ' ') {
+        return 0;
+    } else {
+        return (int) (digit - '0');
+    }
 }
 
 -(void) highlightButtonForDigit: (char)digit
@@ -77,12 +87,8 @@ const double horizontalButtonFraction = 0.95 / numberOfButtons;
 
 -(void) selectDigit: (char)digit
 {
-    if (_selectedDigit != ' ') {
-        [self unhighlightButtonForDigit: _selectedDigit];
-    }
-    if (digit != ' ') {
-        [self highlightButtonForDigit: digit];
-    }
+    [self unhighlightButtonForDigit: _selectedDigit];
+    [self highlightButtonForDigit: digit];
     _selectedDigit = digit;
 }
 
@@ -93,12 +99,12 @@ const double horizontalButtonFraction = 0.95 / numberOfButtons;
 }
 
 /*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
 
 @end

@@ -2,7 +2,7 @@
 //  GridView.m
 //  Sudoku
 //
-//  Created by Greg Kronmiller on 2/13/13.
+//  Created by Greg Kronmiller on 2/10/13.
 //  Copyright (c) 2013 Evan Gaebler, Greg Kronmiller, Linnea Shin, and Michelle Chesley. All rights reserved.
 //
 
@@ -129,12 +129,12 @@
 }
 
 /*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
 
 @end

@@ -2,7 +2,7 @@
 //  CellView.m
 //  Sudoku
 //
-//  Created by Greg Kronmiller on 2/13/13.
+//  Created by Greg Kronmiller on 2/10/13.
 //  Copyright (c) 2013 Evan Gaebler, Greg Kronmiller, Linnea Shin, and Michelle Chesley. All rights reserved.
 //
 
@@ -24,14 +24,14 @@
         cellSelectionAction = nil;
         
         CGRect subframe = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
-        
+
         button = [[UIButton alloc] initWithFrame: subframe];
         
         // set the appearance of the button
         [self unhighlight];
         
         [[button layer] setBackgroundColor: [UIColor whiteColor].CGColor];
-        //        [[button layer] setCornerRadius: 8];
+//        [[button layer] setCornerRadius: 8];
         [self markAsImmutable];
         int fontSize = MIN(frame.size.width, frame.size.height) * 0.9;
         button.titleLabel.font = [UIFont fontWithName: @"Helvetica" size: fontSize];
@@ -87,6 +87,7 @@
     cellSelectionTarget = sender;
     cellSelectionAction = action;
 }
+
 -(void) setFlashTimeoutTarget: (id)sender action: (SEL)action
 {
     flashTimeoutTarget = sender;
@@ -109,12 +110,12 @@
 }
 
 /*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
 
 @end
