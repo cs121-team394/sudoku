@@ -4,8 +4,6 @@ sudoku
 sudoku for cs121
 
 Known problems:
-  * The "New Game" and "Reset Board" buttons don't give any feedback when
-    clicked.
   * The "Congratulations!" that appears when a board is finished doesn't go
     away if digits are removed from the board. Either it should go away or the
     board, once completed, should become wholly immutable.

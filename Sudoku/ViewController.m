@@ -173,13 +173,18 @@
 
 -(UIButton*) createButtonInFrame: (CGRect)frame WithText: (NSString*)text
 {
-    UIButton* button = [[UIButton alloc] initWithFrame:frame];
+//    UIButton* button = [[UIButton alloc] initWithFrame:frame];
+    UIButton* button = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    
+    button.frame = frame;
+    [button setTintColor: [UIColor colorWithRed: 0.0 green: 0.4 blue: 0.5 alpha: 1.0]];
     
     [button setBackgroundColor:[UIColor whiteColor]];
     [button setTitle:text forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont fontWithName: @"Helvetica" size: 32];
     [[button layer] setCornerRadius: 8];
+//    button.showsTouchWhenHighlighted = true;
     [self.view addSubview:button];
     
     return button;

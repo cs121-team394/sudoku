@@ -31,7 +31,7 @@
         [self unhighlight];
         
         [[button layer] setBackgroundColor: [UIColor whiteColor].CGColor];
-//        [[button layer] setCornerRadius: 8];
+        [[button layer] setCornerRadius: 3];
         [self markAsImmutable];
         int fontSize = MIN(frame.size.width, frame.size.height) * 0.9;
         button.titleLabel.font = [UIFont fontWithName: @"Helvetica" size: fontSize];
